@@ -7,7 +7,7 @@ import lombok.Setter;
 public class StockBuyOutput {
 	
 	private String message;
-	private Integer	StatusCode;
+	private Integer	statusCode;
 	private Integer	purchaseId;
 		
 

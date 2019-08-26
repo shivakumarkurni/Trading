@@ -85,7 +85,7 @@ public class StockBuyServiceImpl implements StockBuyService {
 		purchase.setUserId(stockBuyInput.getUserId());
 		purchase.setAmount(stockAmount);
 		purchase.setStockId(stockBuyInput.getStockId());
-		 purchaseRepository.save(purchase);
+		purchaseRepository.save(purchase);
 
 		StockBuyOutput stockBuyOutput = new StockBuyOutput();
 		stockBuyOutput.setMessage("stock succsessfully added");

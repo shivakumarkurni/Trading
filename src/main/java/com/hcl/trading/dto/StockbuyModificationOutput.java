@@ -6,9 +6,9 @@ import lombok.Setter;
 @Setter @Getter
 public class StockbuyModificationOutput {
 
-	private Integer CurrentAmount;
+	private Integer currentAmount;
 	private Integer brokarage;
-	private Integer PreviousAmount;
+	private Integer previousAmount;
 	private String message;
 	private Integer statusCode;
 

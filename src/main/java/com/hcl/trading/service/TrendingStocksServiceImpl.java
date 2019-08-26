@@ -9,6 +9,13 @@ import com.hcl.trading.dto.TrendingStocksDTO;
 import com.hcl.trading.repository.PurchaseRepository;
 import com.hcl.trading.repository.StockRepository;
 
+/**
+ * @author Shiva
+ * 
+ *         This class will return the top trending stocks
+ * 
+ */
+
 @Service
 public class TrendingStocksServiceImpl implements TrendingStocksService {
 
@@ -18,10 +25,16 @@ public class TrendingStocksServiceImpl implements TrendingStocksService {
 	@Autowired
 	StockRepository stockRepository;
 
+	/**
+	 * 
+	 * This method will return the top trending stocks
+	 * 
+	 */
+
 	@Override
 	public List<TrendingStocksDTO> trendingStocks() {
 
-		List<TrendingStocksDTO> purchaseList = purchaseRepository.findByPurchaseStatus("CONFIRMED");
+		List<TrendingStocksDTO> purchaseList = purchaseRepository.findByPurchaseStatus("ACCEPTED");
 
 		return purchaseList;
 	}
