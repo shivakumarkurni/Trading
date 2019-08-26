@@ -30,9 +30,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Override
 	public List<PurchaseDTO> purchasedList(Integer userId, String status) {
 
-
-		logger.info("Inside PurchaseServiceImpl userId:{}, status:{}" , userId,status);
-
+		logger.info("Inside PurchaseServiceImpl userId:{}, status:{}", userId, status);
 
 		PurchaseDTO purchaseDTO = null;
 		List<PurchaseDTO> purchasedDTOList = new ArrayList<>();
@@ -44,15 +42,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 			Optional<Stock> optStock = stockRepository.findById(stockId);
 
-
 			if (optStock.isPresent()) {
 
-			if(!optStock.isPresent())
-				throw new TradingException("no stock available");
-			Stock stock = optStock.get();
-
-
-				
+				Stock stock = optStock.get();
 
 				String stockName = stock.getStockName();
 
@@ -64,6 +56,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 				purchaseDTO.setPurchaseStatus(purchase.getPurchaseStatus());
 
 				purchasedDTOList.add(purchaseDTO);
+			}
+
+			else {
+				throw new TradingException("no stock available");
+
 			}
 
 		}
