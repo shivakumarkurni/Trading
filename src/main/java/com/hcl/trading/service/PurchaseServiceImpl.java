@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.hcl.trading.dto.PurchaseDTO;
 import com.hcl.trading.entity.Purchase;
 import com.hcl.trading.entity.Stock;
+import com.hcl.trading.exception.TradingException;
 import com.hcl.trading.repository.PurchaseRepository;
 import com.hcl.trading.repository.StockRepository;
 
@@ -29,7 +30,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Override
 	public List<PurchaseDTO> purchasedList(Integer userId, String status) {
 
-	
+
+		logger.info("Inside PurchaseServiceImpl userId:{}, status:{}" , userId,status);
+
 
 		PurchaseDTO purchaseDTO = null;
 		List<PurchaseDTO> purchasedDTOList = new ArrayList<>();
@@ -41,9 +44,15 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 			Optional<Stock> optStock = stockRepository.findById(stockId);
 
+
 			if (optStock.isPresent()) {
 
-				Stock stock = optStock.get();
+			if(!optStock.isPresent())
+				throw new TradingException("no stock available");
+			Stock stock = optStock.get();
+
+
+				
 
 				String stockName = stock.getStockName();
 
