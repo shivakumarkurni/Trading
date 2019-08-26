@@ -34,9 +34,8 @@ public class TrendingStocksServiceImpl implements TrendingStocksService {
 	@Override
 	public List<TrendingStocksDTO> trendingStocks() {
 
-		List<TrendingStocksDTO> purchaseList = purchaseRepository.findByPurchaseStatus("ACCEPTED");
+		return purchaseRepository.findByPurchaseStatus("ACCEPTED");
 
-		return purchaseList;
 	}
 
 }
