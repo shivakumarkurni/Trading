@@ -12,12 +12,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hcl.trading.dto.TrendingStocksDTO;
 import com.hcl.trading.service.TrendingStocksServiceImpl;
 
+/**
+ * @author Shiva
+ * 
+ * This class will pass the Top Trending stocks
+ *
+ */
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 @RestController
 public class TrendingStocksController {
 
 	@Autowired
 	TrendingStocksServiceImpl trendingStocksServiceImpl;
+
+	/**
+	 * 
+	 * This method will return the top trending stocks
+	 * 
+	 */
 
 	@GetMapping("/topStocks")
 	public ResponseEntity<List<TrendingStocksDTO>> trendingList() {

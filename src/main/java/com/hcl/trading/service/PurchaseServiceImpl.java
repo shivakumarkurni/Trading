@@ -16,6 +16,13 @@ import com.hcl.trading.exception.TradingException;
 import com.hcl.trading.repository.PurchaseRepository;
 import com.hcl.trading.repository.StockRepository;
 
+
+/**
+ * @author Shiva
+ * 
+ * This class will check the status of stocks and return list of Purchased stocks
+ *
+ */
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
 
@@ -26,6 +33,15 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Autowired
 	StockRepository stockRepository;
+	
+	/**
+	 * This method returns the list of Accepted stocks/CANCEL stocks
+	 * 
+	 * @param  userId,status
+	 * 
+	 * @return PurchaseDTO
+	 *
+	 */
 
 	@Override
 	public List<PurchaseDTO> purchasedList(Integer userId, String status) {
