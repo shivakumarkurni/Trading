@@ -9,5 +9,4 @@ import com.hcl.trading.entity.Stock;
 public interface StockRepository extends JpaRepository<Stock, Integer> {
 	
 	
-
 }
