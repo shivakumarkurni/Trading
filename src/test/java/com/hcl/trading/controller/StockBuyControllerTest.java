@@ -45,7 +45,7 @@ public class StockBuyControllerTest {
 		stockbuyModificationInput=new StockbuyModificationInput();
 		stockbuyModificationInput.setFlag(1);
 		stockbuyModificationInput.setPurchaseId(1);
-		stockbuyModificationInput.setQuantity(10);
+		stockbuyModificationInput.setStockQuantity(10);
 		stockbuyModificationOutput=new StockbuyModificationOutput();
 		stockbuyModificationOutput.setBrokarage(100);
 		stockbuyModificationOutput.setCurrentAmount(1000);
@@ -57,7 +57,7 @@ public class StockBuyControllerTest {
 		Mockito.when(stockBuyService.stockbuy(stockBuyInput)).thenReturn(stockBuyOutput);
 		
 		ResponseEntity<StockBuyOutput> actual = stockBuyController.stockbuy(stockBuyInput);
-		Assert.assertEquals(HttpStatus.CREATED.value(), actual.getStatusCodeValue());
+		Assert.assertEquals(HttpStatus.CREATED.value(), actual.getStatusCodeValue()); 
 		
 	}
 	

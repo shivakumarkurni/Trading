@@ -91,7 +91,7 @@ public class StockBuyServiceImplTest {
 		 stockbuyModificationInput=new StockbuyModificationInput();
 		 stockbuyModificationInput.setFlag(1);
 		 stockbuyModificationInput.setPurchaseId(1);
-		 stockbuyModificationInput.setQuantity(10);
+		 stockbuyModificationInput.setStockQuantity(10);
 	}
 	
 	@Test
