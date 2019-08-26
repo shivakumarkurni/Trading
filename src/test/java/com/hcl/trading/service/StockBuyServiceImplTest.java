@@ -128,6 +128,20 @@ public class StockBuyServiceImplTest {
 
 	}
 
+	
+	@Test
+	public void stockbuyExcepton3() {
+
+		Mockito.when(stockRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(stock));
+//		Mockito.when(tradingRepository.findByStockId(Mockito.anyInt())).thenReturn(tradings);
+		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
+
+		StockBuyOutput actual = stockBuyServiceImpl.stockbuy(stockBuyInput);
+		
+			Assert.assertEquals(HttpStatus.CREATED.value(), actual.getStatusCode().intValue());
+
+	}
+
 	@Test(expected = TradingException.class)
 	public void stockbuyModificationException() { 
 		
