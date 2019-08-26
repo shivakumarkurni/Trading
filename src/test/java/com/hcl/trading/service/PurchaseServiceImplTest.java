@@ -81,7 +81,7 @@ public class PurchaseServiceImplTest {
 
 		purchaseDTO = new PurchaseDTO();
 		purchaseDTO.setStockName("HCL");
-		purchaseDTO.setQuantity(purchase.getQuantity());
+		purchaseDTO.setStockQuantity(purchase.getQuantity());
 		purchaseDTO.setAmount(purchase.getAmount());
 		purchaseDTO.setPurchaseDate(purchase.getPurchaseDate());
 		purchaseDTO.setPurchaseStatus(purchase.getPurchaseStatus());
@@ -90,7 +90,7 @@ public class PurchaseServiceImplTest {
 
 		purchaseDTO1 = new PurchaseDTO();
 		purchaseDTO1.setStockName("HCL Technologies");
-		purchaseDTO1.setQuantity(purchase.getQuantity());
+		purchaseDTO1.setStockQuantity(purchase.getQuantity());
 		purchaseDTO1.setAmount(purchase.getAmount());
 		purchaseDTO1.setPurchaseDate(purchase.getPurchaseDate());
 		purchaseDTO1.setPurchaseStatus(purchase.getPurchaseStatus());

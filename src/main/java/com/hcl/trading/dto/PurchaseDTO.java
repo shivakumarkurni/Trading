@@ -17,7 +17,7 @@ public class PurchaseDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String stockName;
-	private Integer quantity;
+	private Integer stockQuantity;
 	private Integer amount;
 	private LocalDate purchaseDate;
 	private String purchaseStatus;

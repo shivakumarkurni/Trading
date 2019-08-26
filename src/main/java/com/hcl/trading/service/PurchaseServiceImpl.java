@@ -67,7 +67,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 			purchaseDTO = new PurchaseDTO();
 			purchaseDTO.setStockName(stockName);
-			purchaseDTO.setQuantity(purchase.getQuantity());
+			purchaseDTO.setStockQuantity(purchase.getQuantity());
 			purchaseDTO.setAmount(purchase.getAmount());
 			purchaseDTO.setPurchaseDate(purchase.getPurchaseDate());
 			purchaseDTO.setPurchaseStatus(purchase.getPurchaseStatus());
