@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.hcl.trading.dto.EpurchaseStatus;
 import com.hcl.trading.dto.StockBuyInput;
@@ -69,6 +70,13 @@ public class StockBuyServiceImpl implements StockBuyService {
 			Trading trading = tradings.get(tradings.size() - 1);
 			stockAmount = trading.getTradingPrice() * stockBuyInput.getStockQuantity();
 			stockAmount = stockAmount + (stockAmount % trading.getBrokarage());
+			
+//			RestTemplate restTemplate=new RestTemplate();
+//			restTemplate.exchange("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + stock.get().getStockName()
+//					+ "&apikey=CQA8OG03A7GVM5ZU", HttpMethod.GET, entity, GlobalQuoteDto.class).getBody(),
+//			HttpStatus.OK);
+//			
+//			
 
 		} else {
 			stockAmount = stock.get().getStockPrice() * stockBuyInput.getStockQuantity();
@@ -106,9 +114,9 @@ public class StockBuyServiceImpl implements StockBuyService {
 	@Override
 	public StockbuyModificationOutput stockbuyModification(StockbuyModificationInput stockbuyModificationInput) {
 
-		logger.info("StockBuyServiceImpl ---> stockbuyModification Flag:{}, PurchaseId:{},Quantity:{} ",
+		logger.info("StockBuyServiceImpl ---> stockbuyModification Flag:{}, PurchaseId:{},StockQuantity:{} ",
 				stockbuyModificationInput.getFlag(), stockbuyModificationInput.getPurchaseId(),
-				stockbuyModificationInput.getQuantity());
+				stockbuyModificationInput.getStockQuantity());
 
 		Optional<Purchase> purchase = purchaseRepository.findById(stockbuyModificationInput.getPurchaseId());
 
@@ -126,19 +134,19 @@ public class StockBuyServiceImpl implements StockBuyService {
 
 		if (!tradings.isEmpty()) {
 			Trading trading = tradings.get(tradings.size() - 1);
-			stockAmount = trading.getTradingPrice() * stockbuyModificationInput.getQuantity();
+			stockAmount = trading.getTradingPrice() * stockbuyModificationInput.getStockQuantity();
 			brockarage = stockAmount % trading.getBrokarage();
 
 			stockAmount = stockAmount + brockarage;
 
 		} else {
-			stockAmount = stock.get().getStockPrice() * stockbuyModificationInput.getQuantity();
+			stockAmount = stock.get().getStockPrice() * stockbuyModificationInput.getStockQuantity();
 			brockarage = stockAmount / 10;
 			stockAmount = stockAmount + (stockAmount / 10);
 
 		}
 
-		purchase.get().setQuantity(stockbuyModificationInput.getQuantity());
+		purchase.get().setQuantity(stockbuyModificationInput.getStockQuantity());
 		purchase.get().setAmount(stockAmount);
 		// Confirmation stock
 		StockbuyModificationOutput stockbuyModificationOutput = new StockbuyModificationOutput();
@@ -165,7 +173,7 @@ public class StockBuyServiceImpl implements StockBuyService {
 		stockbuyModificationOutput.setCurrentAmount(stockAmount);
 		stockbuyModificationOutput.setBrokarage(brockarage);
 		stockbuyModificationOutput
-				.setPreviousAmount(stock.get().getStockPrice() * stockbuyModificationInput.getQuantity());
+				.setPreviousAmount(stock.get().getStockPrice() * stockbuyModificationInput.getStockQuantity());
 		stockbuyModificationOutput.setStatusCode(HttpStatus.CREATED.value());
 		
 		logger.info("StockBuyServiceImpl ---> stockbuyModification  completed");
