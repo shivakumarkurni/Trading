@@ -92,10 +92,13 @@ public class StockBuyServiceImpl implements StockBuyService {
 		List<Trading> tradings = tradingRepository.findByStockId(purchase.get().getStockId());
 
 		Optional<Stock> stock = stockRepository.findById(purchase.get().getStockId());
+		if (!stock.isPresent()) 
+			throw new TradingException("stock not existed");
 
+		
 		Integer stockAmount;
 		Integer brockarage;
-
+ 
 		if (!tradings.isEmpty()) {
 			Trading trading = tradings.get(tradings.size() - 1);
 			stockAmount = trading.getTradingPrice() * stockbuyModificationInput.getQuantity();
@@ -107,7 +110,7 @@ public class StockBuyServiceImpl implements StockBuyService {
 			stockAmount = stock.get().getStockPrice() * stockbuyModificationInput.getQuantity();
 			brockarage=stockAmount /10;
 			stockAmount = stockAmount + (stockAmount/ 10);
-
+ 
 		}
 
 		
@@ -136,7 +139,7 @@ public class StockBuyServiceImpl implements StockBuyService {
 			stockbuyModificationOutput.setMessage("stock modified");
 
 
-		}
+		} 
 
 		purchaseRepository.save(purchase.get());
   

@@ -45,17 +45,18 @@ public class PurchaseServiceImpl implements PurchaseService {
 			Optional<Stock> optStock = stockRepository.findById(stockId);
 
 
-			if (optStock.isPresent()) {
 
 			if(!optStock.isPresent())
 				throw new TradingException("no stock available");
+			
+			
 			Stock stock = optStock.get();
 
 
 				
 
 				String stockName = stock.getStockName();
-
+ 
 				purchaseDTO = new PurchaseDTO();
 				purchaseDTO.setStockName(stockName);
 				purchaseDTO.setQuantity(purchase.getQuantity());
@@ -64,7 +65,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 				purchaseDTO.setPurchaseStatus(purchase.getPurchaseStatus());
 
 				purchasedDTOList.add(purchaseDTO);
-			}
+			
 
 		}
 
