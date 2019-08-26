@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.hcl.trading.dto.EpurchaseStatus;
 import com.hcl.trading.dto.StockBuyInput;
@@ -71,13 +70,8 @@ public class StockBuyServiceImpl implements StockBuyService {
 			stockAmount = trading.getTradingPrice() * stockBuyInput.getStockQuantity();
 			stockAmount = stockAmount + (stockAmount % trading.getBrokarage());
 			
-//			RestTemplate restTemplate=new RestTemplate();
-//			restTemplate.exchange("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + stock.get().getStockName()
-//					+ "&apikey=CQA8OG03A7GVM5ZU", HttpMethod.GET, entity, GlobalQuoteDto.class).getBody(),
-//			HttpStatus.OK);
-//			
-//			
-
+		
+		
 		} else {
 			stockAmount = stock.get().getStockPrice() * stockBuyInput.getStockQuantity();
 			stockAmount = stockAmount + (stockAmount % 10);
@@ -91,11 +85,11 @@ public class StockBuyServiceImpl implements StockBuyService {
 		purchase.setUserId(stockBuyInput.getUserId());
 		purchase.setAmount(stockAmount);
 		purchase.setStockId(stockBuyInput.getStockId());
-		Purchase purchase2 = purchaseRepository.save(purchase);
+		 purchaseRepository.save(purchase);
 
 		StockBuyOutput stockBuyOutput = new StockBuyOutput();
 		stockBuyOutput.setMessage("stock succsessfully added");
-		stockBuyOutput.setPurchaseId(purchase2.getPurchaseId());
+		stockBuyOutput.setPurchaseId(purchase.getPurchaseId());
 		stockBuyOutput.setStatusCode(HttpStatus.CREATED.value());
 		
 		logger.info("StockBuyServiceImpl ---> stockbuy  completed");

@@ -79,7 +79,7 @@ public class StockBuyServiceImplTest {
 		 purchase.setStockId(stock.getStockId());
 		 purchase.setUserId(1);
 		 tradings=new ArrayList<>();
-		 tradings.add(trading);
+		 tradings.add(trading); 
 		 
 		 stockBuyInput=new StockBuyInput();
 		 stockBuyInput.setFlag(1);
@@ -99,7 +99,6 @@ public class StockBuyServiceImplTest {
 
 		Mockito.when(stockRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(stock));
 		Mockito.when(tradingRepository.findByStockId(Mockito.anyInt())).thenReturn(tradings);
-//		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
 
 		StockBuyOutput actual = stockBuyServiceImpl.stockbuy(stockBuyInput);
 		
@@ -110,9 +109,6 @@ public class StockBuyServiceImplTest {
 	@Test(expected = TradingException.class)
 	public void stockbuyExcepton1() {
 
-//		Mockito.when(stockRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(stock));
-//		Mockito.when(tradingRepository.findByStockId(Mockito.anyInt())).thenReturn(tradings);
-//		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
 
 		 stockBuyServiceImpl.stockbuy(stockBuyInput);
 		
@@ -123,8 +119,8 @@ public class StockBuyServiceImplTest {
 	public void stockbuyExcepton2() {
 
 		Mockito.when(stockRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(stock));
-//		Mockito.when(tradingRepository.findByStockId(Mockito.anyInt())).thenReturn(tradings);
-//		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
+		Mockito.when(tradingRepository.findByStockId(Mockito.anyInt())).thenReturn(tradings);
+		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
 
 		StockBuyOutput actual = stockBuyServiceImpl.stockbuy(stockBuyInput);
 		
@@ -138,9 +134,6 @@ public class StockBuyServiceImplTest {
 		tradings.add(trading);
 		
 		Mockito.when(stockRepository.findById(Mockito.any())).thenReturn(Optional.of(stock));
-//		Mockito.when(tradingRepository.findByStockId(Mockito.any())).thenReturn(tradings);
-//		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
-//		Mockito.when(stockRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(stock));
 
 		 stockBuyServiceImpl.stockbuyModification(stockbuyModificationInput);
 	
@@ -234,5 +227,5 @@ public class StockBuyServiceImplTest {
 	
 	}
 
-	
+	 
 }
