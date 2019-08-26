@@ -29,11 +29,10 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Override
 	public List<PurchaseDTO> purchasedList(Integer userId, String status) {
 
-		logger.info("Inside PurchaseServiceImpl:" + userId);
-		logger.info("Inside PurchaseServiceImpl:" + status);
+	
 
 		PurchaseDTO purchaseDTO = null;
-		List<PurchaseDTO> purchasedDTOList=new ArrayList<>();
+		List<PurchaseDTO> purchasedDTOList = new ArrayList<>();
 		List<Purchase> purchasedList = purchaseRepository.findByUserIdAndPurchaseStatus(userId, status);
 
 		for (Purchase purchase : purchasedList) {
@@ -42,18 +41,21 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 			Optional<Stock> optStock = stockRepository.findById(stockId);
 
-			Stock stock = optStock.get();
+			if (optStock.isPresent()) {
 
-			String stockName = stock.getStockName();
+				Stock stock = optStock.get();
 
-			purchaseDTO = new PurchaseDTO();
-			purchaseDTO.setStockName(stockName);
-			purchaseDTO.setQuantity(purchase.getQuantity());
-			purchaseDTO.setAmount(purchase.getAmount());
-			purchaseDTO.setPurchaseDate(purchase.getPurchaseDate());
-			purchaseDTO.setPurchaseStatus(purchase.getPurchaseStatus());
-			
-			purchasedDTOList.add(purchaseDTO);
+				String stockName = stock.getStockName();
+
+				purchaseDTO = new PurchaseDTO();
+				purchaseDTO.setStockName(stockName);
+				purchaseDTO.setQuantity(purchase.getQuantity());
+				purchaseDTO.setAmount(purchase.getAmount());
+				purchaseDTO.setPurchaseDate(purchase.getPurchaseDate());
+				purchaseDTO.setPurchaseStatus(purchase.getPurchaseStatus());
+
+				purchasedDTOList.add(purchaseDTO);
+			}
 
 		}
 

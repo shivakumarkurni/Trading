@@ -8,7 +8,6 @@ import com.hcl.trading.entity.Stock;
 
 @Repository
 
-
 public interface StockRepository extends JpaRepository<Stock, Integer>{
 
 
