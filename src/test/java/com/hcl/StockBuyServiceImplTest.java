@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import com.hcl.trading.dto.EpurchaseStatus;
 import com.hcl.trading.dto.StockBuyInput;
 import com.hcl.trading.dto.StockBuyOutput;
+import com.hcl.trading.dto.StockbuyModificationInput;
+import com.hcl.trading.dto.StockbuyModificationOutput;
 import com.hcl.trading.entity.Purchase;
 import com.hcl.trading.entity.Stock;
 import com.hcl.trading.entity.Trading;
@@ -51,6 +53,7 @@ public class StockBuyServiceImplTest {
 	StockBuyInput stockBuyInput;
 
 	Purchase purchase;
+	StockbuyModificationInput stockbuyModificationInput;
 	@org.junit.Before
 	public void setup() {
 		
@@ -80,9 +83,15 @@ public class StockBuyServiceImplTest {
 		 
 		 stockBuyInput=new StockBuyInput();
 		 stockBuyInput.setFlag(1);
-		 stockBuyInput.setQuantity(10);
+		 stockBuyInput.setStockQuantity(10);
 		 stockBuyInput.setStockId(stock.getStockId());
 		 stockBuyInput.setUserId(1);
+		 
+		 
+		 stockbuyModificationInput=new StockbuyModificationInput();
+		 stockbuyModificationInput.setFlag(1);
+		 stockbuyModificationInput.setPurchaseId(1);
+		 stockbuyModificationInput.setQuantity(10);
 	}
 	
 	@Test
@@ -121,6 +130,19 @@ public class StockBuyServiceImplTest {
 		
 			Assert.assertEquals(HttpStatus.CREATED.value(), actual.getStatusCode().intValue());
 
+	}
+
+	@Test
+	public void stockbuyModification() { 
+		
+		Mockito.when(stockRepository.findById(Mockito.any())).thenReturn(Optional.of(stock));
+		Mockito.when(tradingRepository.findByStockId(Mockito.any())).thenReturn(tradings);
+		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
+		Mockito.when(stockRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(stock));
+
+		StockbuyModificationOutput actual = stockBuyServiceImpl.stockbuyModification(stockbuyModificationInput);
+		Assert.assertEquals(HttpStatus.CREATED.value(), actual.getStatusCode().intValue());
+	
 	}
 
 	

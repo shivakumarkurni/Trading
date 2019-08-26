@@ -8,7 +8,7 @@ public class StockBuyInput {
 	
 		private Integer userId;
 		private Integer stockId;
-		private Integer quantity;
+		private Integer stockQuantity;
 		private Integer flag;
 		
 
