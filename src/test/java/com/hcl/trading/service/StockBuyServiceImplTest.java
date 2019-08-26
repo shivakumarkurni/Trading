@@ -220,7 +220,7 @@ public class StockBuyServiceImplTest {
 	@Test(expected = TradingException.class)
 	public void stockbuyModification5() { 
 		
-		tradings.add(trading);
+		tradings.add(trading); 
 		
 		stockbuyModificationInput.setFlag(10);
 		
