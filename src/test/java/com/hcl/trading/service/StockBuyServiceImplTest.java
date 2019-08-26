@@ -152,6 +152,60 @@ public class StockBuyServiceImplTest {
 		
 		tradings.add(trading);
 		
+		Mockito.when(purchaseRepository.findById(stockbuyModificationInput.getPurchaseId())).thenReturn(Optional.of(purchase));
+		Mockito.when(stockRepository.findById(Mockito.any())).thenReturn(Optional.of(stock));
+		Mockito.when(tradingRepository.findByStockId(Mockito.any())).thenReturn(tradings);
+		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
+		Mockito.when(stockRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(stock));
+
+		StockbuyModificationOutput actual = stockBuyServiceImpl.stockbuyModification(stockbuyModificationInput);
+		Assert.assertEquals(HttpStatus.CREATED.value(), actual.getStatusCode().intValue());
+	
+	}
+	
+	@Test
+	public void stockbuyModification2() { 
+		
+		tradings.add(trading);
+		
+		Mockito.when(purchaseRepository.findById(stockbuyModificationInput.getPurchaseId())).thenReturn(Optional.of(purchase));
+		Mockito.when(stockRepository.findById(Mockito.any())).thenReturn(Optional.of(stock));
+//		Mockito.when(tradingRepository.findByStockId(Mockito.any())).thenReturn(tradings);
+		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
+		Mockito.when(stockRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(stock));
+
+		StockbuyModificationOutput actual = stockBuyServiceImpl.stockbuyModification(stockbuyModificationInput);
+		Assert.assertEquals(HttpStatus.CREATED.value(), actual.getStatusCode().intValue());
+	
+	}
+	
+	@Test
+	public void stockbuyModification3() { 
+		
+		tradings.add(trading);
+		
+		stockbuyModificationInput.setFlag(2);
+		
+		Mockito.when(purchaseRepository.findById(stockbuyModificationInput.getPurchaseId())).thenReturn(Optional.of(purchase));
+		Mockito.when(stockRepository.findById(Mockito.any())).thenReturn(Optional.of(stock));
+		Mockito.when(tradingRepository.findByStockId(Mockito.any())).thenReturn(tradings);
+		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
+		Mockito.when(stockRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(stock));
+
+		StockbuyModificationOutput actual = stockBuyServiceImpl.stockbuyModification(stockbuyModificationInput);
+		Assert.assertEquals(HttpStatus.CREATED.value(), actual.getStatusCode().intValue());
+	
+	}
+
+	
+	@Test
+	public void stockbuyModification4() { 
+		
+		tradings.add(trading);
+		
+		stockbuyModificationInput.setFlag(10);
+		
+		Mockito.when(purchaseRepository.findById(stockbuyModificationInput.getPurchaseId())).thenReturn(Optional.of(purchase));
 		Mockito.when(stockRepository.findById(Mockito.any())).thenReturn(Optional.of(stock));
 		Mockito.when(tradingRepository.findByStockId(Mockito.any())).thenReturn(tradings);
 		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
