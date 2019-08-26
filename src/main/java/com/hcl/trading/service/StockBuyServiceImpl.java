@@ -84,7 +84,11 @@ public class StockBuyServiceImpl implements StockBuyService {
 	public StockbuyModificationOutput stockbuyModification(StockbuyModificationInput stockbuyModificationInput) {
 
 		Optional<Purchase> purchase = purchaseRepository.findById(stockbuyModificationInput.getPurchaseId());
+		
+		if (!purchase.isPresent())
+			throw new TradingException("pucheses not existed");
 
+		
 		List<Trading> tradings = tradingRepository.findByStockId(purchase.get().getStockId());
 
 		Optional<Stock> stock = stockRepository.findById(purchase.get().getStockId());
@@ -106,9 +110,7 @@ public class StockBuyServiceImpl implements StockBuyService {
 
 		}
 
-		if (!purchase.isPresent())
-			throw new TradingException("pucheses not existed");
-
+		
 		purchase.get().setQuantity(stockbuyModificationInput.getQuantity());
 		purchase.get().setAmount(stockAmount);
 		// Confirmation stock

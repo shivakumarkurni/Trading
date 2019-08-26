@@ -1,4 +1,4 @@
-package com.hcl;
+package com.hcl.trading.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -132,8 +132,25 @@ public class StockBuyServiceImplTest {
 
 	}
 
+	@Test(expected = TradingException.class)
+	public void stockbuyModificationException() { 
+		
+		tradings.add(trading);
+		
+		Mockito.when(stockRepository.findById(Mockito.any())).thenReturn(Optional.of(stock));
+		Mockito.when(tradingRepository.findByStockId(Mockito.any())).thenReturn(tradings);
+		Mockito.when(purchaseRepository.save(purchase)).thenReturn(purchase);
+		Mockito.when(stockRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(stock));
+
+		 stockBuyServiceImpl.stockbuyModification(stockbuyModificationInput);
+	
+	}
+
+	
 	@Test
 	public void stockbuyModification() { 
+		
+		tradings.add(trading);
 		
 		Mockito.when(stockRepository.findById(Mockito.any())).thenReturn(Optional.of(stock));
 		Mockito.when(tradingRepository.findByStockId(Mockito.any())).thenReturn(tradings);
