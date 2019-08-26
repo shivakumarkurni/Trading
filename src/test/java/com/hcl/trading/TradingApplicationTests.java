@@ -1,4 +1,4 @@
-package com.hcl;
+package com.hcl.trading;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
